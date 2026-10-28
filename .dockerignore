@@ -1,0 +1,11 @@
+.git
+node_modules
+coverage
+artifacts
+*.tar
+*.tar.gz
+*.zip
+.env
+.env.*
+README.md
+compose.yaml

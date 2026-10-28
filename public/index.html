@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf7ef">
+  <meta name="description" content="Meet Pip the savings jar. Change the rate and time, then watch your interest earn interest in a playful interactive story.">
+  <title>Pip’s Compound Interest Playground</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+<main>
+  <header><a class="brand" href="./"><span class="brand-icon" aria-hidden="true">✦</span> little money lab</a><span class="header-note">BIG IDEAS FOR LITTLE SAVERS</span></header>
+  <section class="intro"><div><p class="eyebrow">MEET YOUR MONEY’S SUPERPOWER</p><h1>Small savings.<br><em>Growing possibilities.</em></h1><p class="intro-copy">Meet Pip. Give your savings a little time, and watch the interest earn interest of its own.</p></div><div class="intro-note"><span aria-hidden="true">↙</span> Change the numbers.<br>See the story change.</div></section>
+  <div class="playground">
+    <section class="story-panel" aria-label="Interactive savings story">
+      <div class="story-top"><span class="pill"><span class="dot"></span> PIP’S SAVINGS STORY</span><span id="year-label">Year 0 of 2</span></div>
+      <div class="story-heading" aria-live="polite" aria-atomic="true"><h2 id="story-title">Every story starts with a little saving.</h2><p id="story-caption"></p></div>
+      <div class="scene">
+        <svg id="scene-svg" viewBox="0 0 640 380" role="img" aria-labelledby="jar-title jar-description">
+          <title id="jar-title">Pip the smiling savings jar</title><desc id="jar-description">Starting savings and earned interest in a jar. Exact balances are shown below.</desc>
+          <defs><linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ecf6ee"/><stop offset="1" stop-color="#cde3d7"/></linearGradient></defs>
+          <ellipse cx="320" cy="351" rx="156" ry="15" fill="#e6e4d7"/>
+          <g class="sprout" aria-hidden="true"><path d="M320 59Q319 34 341 21" fill="none" stroke="#3e7154" stroke-width="4"/><path d="M325 43Q298 43 301 23Q324 23 325 43M327 39Q329 14 351 18Q350 37 327 39" fill="#83ad79"/></g>
+          <rect x="194" y="84" width="252" height="265" rx="48" fill="url(#glass)" stroke="#31594d" stroke-width="3"/>
+          <path d="M211 135V290" stroke="#fff" stroke-opacity=".7" stroke-width="8" stroke-linecap="round"/>
+          <rect x="206" y="64" width="228" height="43" rx="13" fill="#a7c5b1" stroke="#31594d" stroke-width="3"/>
+          <path d="M269 82H371" stroke="#31594d" stroke-width="5" stroke-linecap="round"/>
+          <g class="face"><path d="M282 139q7-13 14 0m48 0q7-13 14 0" fill="none" stroke="#31594d" stroke-width="3.5" stroke-linecap="round"/><path d="M309 149q11 13 22 0" fill="none" stroke="#31594d" stroke-width="3" stroke-linecap="round"/><ellipse cx="275" cy="151" rx="8" ry="4" fill="#e5bba9"/><ellipse cx="365" cy="151" rx="8" ry="4" fill="#e5bba9"/></g>
+          <g id="coins"></g>
+          <g id="reward-one" class="reward" aria-hidden="true"><rect x="17" y="145" width="155" height="75" rx="17" fill="#ffefd0"/><text x="94" y="172" text-anchor="middle" class="reward-small">YOUR SAVINGS EARN</text><text id="savings-reward" x="94" y="202" text-anchor="middle" class="reward-number">$10.00</text><path d="M177 183q20-8 31 12" fill="none" stroke="#b38b40" stroke-width="2" stroke-dasharray="5 5"/></g>
+          <g id="reward-two" class="reward" aria-hidden="true"><rect x="468" y="207" width="155" height="75" rx="17" fill="#e9ddf3"/><text x="545" y="234" text-anchor="middle" class="reward-small">PAST INTEREST EARNS</text><text id="interest-reward" x="545" y="264" text-anchor="middle" class="reward-number">$1.00</text><path d="M463 244q-16-13-30-4" fill="none" stroke="#9174a7" stroke-width="2" stroke-dasharray="5 5"/></g>
+          <g id="time-clock" aria-hidden="true"><circle cx="528" cy="92" r="28" fill="#fffdf8" stroke="#9cae9c" stroke-width="2"/><path d="M528 72v20l12 9" fill="none" stroke="#31594d" stroke-width="2.5" stroke-linecap="round"/></g>
+          <text x="112" y="324" class="doodle" transform="rotate(-8 112 324)">a little patience…</text>
+          <path d="M480 330l8-15m8 17l13-5m-20 20l13 4" stroke="#bcad8c" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="balance"><span>IN PIP’S JAR</span><strong id="balance">$100.00</strong><p id="interest-total">Ready to earn its first reward.</p></div>
+      <div class="legend" aria-label="Coin colors"><span><i class="gold"></i>Starting savings</span><span><i class="green"></i>Saved interest</span><span><i class="purple"></i>Interest on interest</span></div>
+      <div class="transport"><button id="previous" class="icon-button" aria-label="Previous year" title="Previous year">←</button><button id="play" class="play-button">▶ Play story</button><button id="next" class="icon-button" aria-label="Next year" title="Next year">→</button><button id="replay" class="replay-button" aria-label="Replay from the beginning">↻ Replay</button></div>
+      <div class="timeline"><label for="year-scrub">Travel through time</label><input type="range" id="year-scrub" min="0" max="2" value="0" step="1"><div><span>Today</span><span id="timeline-end">2 years</span></div></div>
+    </section>
+    <aside class="controls" aria-label="Adjust your savings experiment">
+      <div class="controls-heading"><span class="mini-icon" aria-hidden="true">⚗</span><div><h2>Your little experiment</h2><p>A few small changes. A whole new story.</p></div></div>
+      <form id="settings-form" novalidate>
+        <div class="control-group"><label for="principal">Start with</label><div class="number-box"><span>$</span><input id="principal" type="number" min="10" max="10000" step="0.01" value="100" inputmode="decimal"><span>saved</span></div><p class="field-note">Choose $10 to $10,000.</p></div>
+        <div class="control-group"><div class="label-row"><label for="rate">Yearly interest rate</label><div class="small-number"><input id="rate-number" type="number" aria-label="Yearly interest rate in percent" min="0" max="30" step="0.1" value="10"><span>%</span></div></div><input id="rate" type="range" min="0" max="30" step="0.1" value="10"><div class="range-labels"><span>0%</span><span>30%</span></div><p class="field-note">A yearly reward, added once each year.</p></div>
+        <div class="control-group"><div class="label-row"><label for="years">Give it time</label><div class="small-number"><input id="years-number" type="number" aria-label="Saving duration in years" min="1" max="30" step="1" value="2"><span>years</span></div></div><input id="years" type="range" min="1" max="30" step="1" value="2"><div class="range-labels"><span>1 year</span><span>30 years</span></div></div>
+        <p id="settings-error" class="error" role="alert" hidden></p>
+      </form>
+      <div class="projection"><p>AFTER <span id="projection-years">2 YEARS</span>, YOU COULD HAVE</p><strong id="projection-balance">$121.00</strong><span id="projection-interest">That’s $21.00 earned by waiting.</span></div>
+      <div class="pace"><label for="speed">Story speed</label><select id="speed"><option value="6500">Slow &amp; steady</option><option value="4200" selected>Just right</option><option value="1800">Fast forward</option></select></div>
+      <label class="motion-option"><input type="checkbox" id="reduce-motion"> Use still pictures (less motion)</label>
+      <div class="aha"><span aria-hidden="true">✧</span><p><strong>The “aha!” moment</strong>Your savings earn interest. Keep that interest, and <em>it can earn interest too.</em> That’s compound interest!</p></div>
+    </aside>
+  </div>
+  <section class="year-explanation" aria-live="polite" aria-atomic="true"><p class="eyebrow" id="breakdown-label">THE FIRST CHAPTER</p><h2 id="breakdown-title">Let’s give your savings a little time.</h2><div id="breakdown-equation" class="equation"></div><p id="breakdown-copy"></p></section>
+  <details class="table-section"><summary>Peek inside every year <span aria-hidden="true">↗</span></summary><div class="table-scroll"><table><caption>Annual compounding, with interest kept in the account.</caption><thead><tr><th scope="col">Year</th><th scope="col">Opening balance</th><th scope="col">On starting savings</th><th scope="col">On past interest</th><th scope="col">New balance</th></tr></thead><tbody id="year-rows"></tbody></table></div></details>
+  <footer><p>Just a pretend savings experiment. We assume a fixed rate with annual compounding, no extra deposits or withdrawals, and no fees or taxes. Real rates vary.</p><span>Made for curious minds. ✦</span></footer>
+</main>
+</body></html>

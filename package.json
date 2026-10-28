@@ -1,0 +1,9 @@
+{
+  "name": "compound-interest-playground",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "An interactive compound interest story for kids",
+  "engines": { "node": ">=22" },
+  "scripts": { "start": "node server.mjs", "test": "node --test" }
+}

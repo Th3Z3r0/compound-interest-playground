@@ -1,0 +1,17 @@
+FROM node:24-alpine AS verified
+WORKDIR /app
+COPY package.json server.mjs ./
+COPY public ./public
+COPY test ./test
+RUN node --test
+
+FROM node:24-alpine AS runtime
+ENV NODE_ENV=production PORT=8080
+WORKDIR /app
+COPY --from=verified --chown=node:node /app/package.json /app/server.mjs ./
+COPY --from=verified --chown=node:node /app/public ./public
+USER node
+EXPOSE 8080
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD ["node", "-e", "fetch('http://127.0.0.1:'+(process.env.PORT||8080)+'/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+CMD ["node", "server.mjs"]
